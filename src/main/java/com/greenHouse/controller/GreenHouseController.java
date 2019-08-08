@@ -102,10 +102,10 @@ public class GreenHouseController {
 	public String loginClient(@PathVariable("usuario") String usuario, @PathVariable("password") String password) {
 		Collection<Admin> authenticate = clientRepository.authenticate(usuario, password);
 		if (authenticate.size() == 0) {
-			log.warn("Intento de logueo de Cliente con credenciales incorrectas");
+			log.warn("Intento de Logueo de Cliente con credenciales incorrectas");
 			return JsonManager.objectToJson(false);
 		}
-		log.info("Intento de logueo de Cliente Correcto");
+		log.info("Intento de Logueo de Cliente Correcto");
 		return JsonManager.objectToJson(true);
 	}
 	

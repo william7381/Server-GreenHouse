@@ -91,10 +91,10 @@ public class GreenHouseController {
 	public String loginAdmin(@PathVariable("usuario") String usuario, @PathVariable("password") String password) {
 		Collection<Admin> authenticate = adminRepository.authenticate(usuario, password);
 		if (authenticate.size() == 0) {
-			log.warn("Intento de logueo de Administrador con credenciales incorrectas");
+			log.warn("Intento de Logueo de Administrador con credenciales incorrectas");
 			return JsonManager.objectToJson(false);
 		}
-		log.info("Intento de logueo de Administrador Correcto");
+		log.info("Intento de Logueo de Administrador Correcto");
 		return JsonManager.objectToJson(true);
 	}
 	

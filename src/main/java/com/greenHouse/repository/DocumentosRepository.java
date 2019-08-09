@@ -9,9 +9,6 @@ import com.greenHouse.entity.TipoDocumento;
 
 public interface DocumentosRepository extends CrudRepository<TipoDocumento, Long>{
 
-	@Query(value = "SELECT * FROM tipoDocumentos n WHERE upper(n.descripcion) = upper((:descripcion))", nativeQuery = true)
+	@Query(value = "SELECT * FROM tipo_documentos n WHERE upper(n.descripcion) = upper((:descripcion))", nativeQuery = true)
 	Collection<TipoDocumento> findByNameIgnoreCase(String descripcion);
-	
-	@Query(value = "SELECT * FROM tipoDocumentos n WHERE n.descripcion = (:descripcion)", nativeQuery = true)
-	Collection<TipoDocumento> findByName(String descripcion);
 }

@@ -11,7 +11,4 @@ public interface PlatoRepository extends CrudRepository<Plato, Long>{
 
 	@Query(value = "SELECT * FROM platos n WHERE upper(n.nombre) = upper((:nombre))", nativeQuery = true)
 	Collection<Plato> findByNameIgnoreCase(String nombre);
-	
-	@Query(value = "SELECT * FROM platos n WHERE n.nombre = (:nombre)", nativeQuery = true)
-	Collection<Plato> findByName(String nombre);
 }

@@ -12,12 +12,6 @@ public interface ProveedorRepository extends CrudRepository<Proveedor, Long>{
 	@Query(value = "SELECT * FROM proveedores n WHERE upper(n.nombre_comercial) = upper((:nombreComercial))", nativeQuery = true)
 	Collection<Proveedor> findByNameIgnoreCase(String nombreComercial);
 	
-	@Query(value = "SELECT * FROM proveedores n WHERE n.nombre_comercial = (:nombreComercial)", nativeQuery = true)
-	Collection<Proveedor> findByName(String nombreComercial);
-	
 	@Query(value = "SELECT * FROM proveedores n WHERE upper(n.dni) = upper((:dni))", nativeQuery = true)
 	Collection<Proveedor> findByDniIgnoreCase(String dni);
-	
-	@Query(value = "SELECT * FROM proveedores n WHERE n.dni = (:dni)", nativeQuery = true)
-	Collection<Proveedor> findByDni(String dni);
 }

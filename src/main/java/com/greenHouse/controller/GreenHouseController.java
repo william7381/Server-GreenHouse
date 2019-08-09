@@ -35,6 +35,7 @@ import com.greenHouse.repository.ProveedorRepository;
 
 @RestController
 public class GreenHouseController {
+	private static final int VALUE_EQUAL_EDIT = 0;
 	@Autowired
 	private CiudadRepository ciudadRepository;
 	@Autowired
@@ -128,9 +129,9 @@ public class GreenHouseController {
 		return "No se encontro";
 	}
 	
-	@RequestMapping(value = "/ciudad", method = RequestMethod.PUT)
-	public String updateCiudades(@Valid @RequestBody Ciudad p) {
-		if (ciudadRepository.findByName(p.getNombre()).size() != 0) {
+	@RequestMapping(value = "/ciudad/{number}", method = RequestMethod.PUT)
+	public String updateCiudades(@Valid @RequestBody Ciudad p, @PathVariable Long number) {
+		if (number != VALUE_EQUAL_EDIT && ciudadRepository.findByNameIgnoreCase(p.getNombre()).size() != 0) {
 			log.warn("Intento de editar Ciudad con el mismo nombre de una ya registrada");
 			return JsonManager.objectToJsonErr(ERR_NAME_EXIST);
 		}
@@ -167,9 +168,9 @@ public class GreenHouseController {
 		return "No se encontro";
 	}
 	
-	@RequestMapping(value = "/documento", method = RequestMethod.PUT)
-	public String updateTiposDocumento(@Valid @RequestBody TipoDocumento p) {
-		if (documentosRepository.findByName(p.getDescripcion()).size() != 0) {
+	@RequestMapping(value = "/documento/{number}", method = RequestMethod.PUT)
+	public String updateTiposDocumento(@Valid @RequestBody TipoDocumento p, @PathVariable Long number) {
+		if (number != VALUE_EQUAL_EDIT && documentosRepository.findByNameIgnoreCase(p.getDescripcion()).size() != 0) {
 			log.warn("Intento de editar Tipo de Documento con el mismo nombre de una ya registrada");
 			return JsonManager.objectToJsonErr(ERR_NAME_EXIST);
 		}
@@ -206,9 +207,9 @@ public class GreenHouseController {
 			return "No se encontro";
 		}
 		
-		@RequestMapping(value = "/tipoProducto", method = RequestMethod.PUT)
-		public String updateTiposProductos(@Valid @RequestBody TipoProducto p) {
-			if (tiposProductosRepository.findByName(p.getDescripcion()).size() != 0) {
+		@RequestMapping(value = "/tipoProducto/{number}", method = RequestMethod.PUT)
+		public String updateTiposProductos(@Valid @RequestBody TipoProducto p, @PathVariable Long number) {
+			if (number != VALUE_EQUAL_EDIT && tiposProductosRepository.findByNameIgnoreCase(p.getDescripcion()).size() != 0) {
 				log.warn("Intento de editar Tipo de Producto con el mismo nombre de una ya registrada");
 				return JsonManager.objectToJsonErr(ERR_NAME_EXIST);
 			}
@@ -270,13 +271,13 @@ public class GreenHouseController {
 		return "No se encontro";
 	}
 	
-	@RequestMapping(value = "/proveedor", method = RequestMethod.PUT)
-	public String updateProveedor(@Valid @RequestBody Proveedor p) {
-		if (proveedorRepository.findByDni(p.getDni()).size() != 0) {
+	@RequestMapping(value = "/proveedor/{numberDni}/{numberName}", method = RequestMethod.PUT)
+	public String updateProveedor(@Valid @RequestBody Proveedor p, @PathVariable Long numberDni, @PathVariable Long numberName) {
+		if (numberDni != VALUE_EQUAL_EDIT && proveedorRepository.findByDniIgnoreCase(p.getDni()).size() != 0) {
 			log.warn("Intento de editar Plato con el mismo dni de una ya registrada");
 			return JsonManager.objectToJsonErr(ERR_DNI_EXIST);
 		}
-		if (proveedorRepository.findByName(p.getNombreComercial()).size() != 0) {
+		if (numberName != VALUE_EQUAL_EDIT && proveedorRepository.findByNameIgnoreCase(p.getNombreComercial()).size() != 0) {
 			log.warn("Intento de editar Proveedor con el mismo nombre de una ya registrada");
 			return JsonManager.objectToJsonErr(ERR_NAME_EXIST);
 		}
@@ -286,7 +287,7 @@ public class GreenHouseController {
 
 	@RequestMapping(value = "/proveedor", method = RequestMethod.POST)
 	public String createProveedor(@Valid @RequestBody Proveedor p) {
-		if (proveedorRepository.findByDni(p.getDni()).size() != 0) {
+		if (proveedorRepository.findByDniIgnoreCase(p.getDni()).size() != 0) {
 			log.warn("Intento de agregar Plato con el mismo dni de una ya registrada");
 			return JsonManager.objectToJsonErr(ERR_DNI_EXIST);
 		}
@@ -317,9 +318,9 @@ public class GreenHouseController {
 		return "No se encontro";
 	}
 	
-	@RequestMapping(value = "/ingrediente", method = RequestMethod.PUT)
-	public String updateIn(@Valid @RequestBody Ingrediente p) {
-		if (ingredienteRepository.findByName(p.getNombre()).size() != 0) {
+	@RequestMapping(value = "/ingrediente/{number}", method = RequestMethod.PUT)
+	public String updateIn(@Valid @RequestBody Ingrediente p, @PathVariable Long number) {
+		if (number != VALUE_EQUAL_EDIT && ingredienteRepository.findByNameIgnoreCase(p.getNombre()).size() != 0) {
 			log.warn("Intento de editar Ingrediente con el mismo nombre de una ya registrada");
 			return JsonManager.objectToJsonErr(ERR_NAME_EXIST);
 		}
@@ -362,9 +363,9 @@ public class GreenHouseController {
 		return "No se encontro";
 	}
 	
-	@RequestMapping(value = "/plato", method = RequestMethod.PUT)
-	public String updatePl(@Valid @RequestBody Plato p) {
-		if (platoRepository.findByName(p.getNombre()).size() != 0) {
+	@RequestMapping(value = "/plato/{number}", method = RequestMethod.PUT)
+	public String updatePl(@Valid @RequestBody Plato p, @PathVariable Long number) {
+		if (number != VALUE_EQUAL_EDIT && platoRepository.findByNameIgnoreCase(p.getNombre()).size() != 0) {
 			log.warn("Intento de editar Plato con el mismo nombre de una ya registrada");
 			return JsonManager.objectToJsonErr(ERR_NAME_EXIST);
 		}

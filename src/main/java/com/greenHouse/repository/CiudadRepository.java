@@ -14,7 +14,4 @@ public interface CiudadRepository extends CrudRepository<Ciudad, Long> {
 
 	@Query(value = "SELECT * FROM ciudades n WHERE upper(n.nombre) = upper((:nombre))", nativeQuery = true)
 	Collection<Ciudad> findByNameIgnoreCase(String nombre);
-	
-	@Query(value = "SELECT * FROM ciudades n WHERE n.nombre = (:nombre)", nativeQuery = true)
-	Collection<Ciudad> findByName(String nombre);
 }
